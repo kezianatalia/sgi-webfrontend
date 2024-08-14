@@ -36,7 +36,7 @@ function Dashboard() {
         position="top-center"
         reverseOrder={false}
       />
-        <MDBox py={3} sx={{ height: '80vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <MDBox py={3} sx={{ height: '70vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={12} lg={12} align="center">
             <MDBox mb={1.5}>

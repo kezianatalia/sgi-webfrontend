@@ -107,7 +107,7 @@ function DetailLokasi() {
               </MDBox>
               <MDBox pt={2} px={5} align="center">
                 {/* Employee ID */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">NIK</MDTypography>
                   </Grid>
@@ -119,7 +119,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Nama */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Nama</MDTypography>
                   </Grid>
@@ -131,7 +131,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Username */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Username</MDTypography>
                   </Grid>
@@ -143,7 +143,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Role */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Role</MDTypography>
                   </Grid>

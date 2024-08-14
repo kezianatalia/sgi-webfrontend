@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams, Link } from "react-router-dom";
 import ReactLoading from "react-loading";
 import { toast, Toaster } from "react-hot-toast";
+import QRCode from 'qrcode.react';
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -12,8 +13,9 @@ import Modal from "@mui/material/Modal";
 import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 import Icon from "@mui/material/Icon";
-import { InputAdornment } from "@mui/material";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper  } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Material Dashboard 2 React components
 import MDBox from "../../../components/MDBox";
@@ -120,6 +122,16 @@ function DetailProduksi() {
     }
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleLihatQR = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -142,7 +154,7 @@ function DetailProduksi() {
               </MDBox>
               <MDBox pt={2} px={5} align="center">
                 {/* ID Produk */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}} >
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">ID Produk</MDTypography>
                   </Grid>
@@ -151,10 +163,35 @@ function DetailProduksi() {
                   </Grid>
                   <Grid item xs={7} md={7} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="medium">{id}</MDTypography>
+                    <MDTypography variant="body2" fontWeight="regular" color="info" sx={{ textDecoration: 'underline', cursor: 'pointer' }}>
+                      <a href="#" onClick={handleLihatQR} style={{ textDecoration: 'none', color: 'inherit' }}>Lihat QR</a>
+                    </MDTypography>
                   </Grid>
                 </Grid>
+                {/* Dialog for QR Code */}
+                <Dialog open={open} onClose={handleClose}>
+                  <DialogTitle>
+                    {id}
+                    <IconButton
+                      aria-label="close"
+                      onClick={handleClose}
+                      sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                      }}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </DialogTitle>
+                  <DialogContent>
+                    <QRCode value={id} size={256} />
+                  </DialogContent>
+                </Dialog>
+
                 {/* Status */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Status</MDTypography>
                   </Grid>
@@ -174,7 +211,7 @@ function DetailProduksi() {
                   </Grid>
                 </Grid>
                 {/* Nama Produk */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Nama Produk</MDTypography>
                   </Grid>
@@ -191,7 +228,7 @@ function DetailProduksi() {
                 </Grid>
                 
                 {/* Petugas Mixing */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Petugas Produksi</MDTypography>
                   </Grid>
@@ -207,9 +244,9 @@ function DetailProduksi() {
                   </Grid>
                 </Grid>
                 {/* Tanggal Mixing */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
-                    <MDTypography variant="subtitle2" fontWeight="regular">Tanggal Produk Diajukan</MDTypography>
+                    <MDTypography variant="subtitle2" fontWeight="regular">Tanggal Diajukan</MDTypography>
                   </Grid>
                   <Grid item xs={1} md={1} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="medium">:</MDTypography>
@@ -223,9 +260,9 @@ function DetailProduksi() {
                   </Grid>
                 </Grid>
                 {/* Berat Total */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
-                    <MDTypography variant="subtitle2" fontWeight="regular">Berat Total Produk</MDTypography>
+                    <MDTypography variant="subtitle2" fontWeight="regular">Berat Total</MDTypography>
                   </Grid>
                   <Grid item xs={1} md={1} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="medium">:</MDTypography>
@@ -236,7 +273,7 @@ function DetailProduksi() {
                 </Grid>
                 
                 {/* Komposisi Madu */}
-                <Grid container spacing={3} align="left" sx={{ ml: { xs: 0, md: 2 } }}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Komposisi Madu</MDTypography>
                   </Grid>

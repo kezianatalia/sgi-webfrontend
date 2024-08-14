@@ -105,7 +105,7 @@ function DetailLokasi() {
               </MDBox>
               <MDBox pt={2} px={5} align="center">
                 {/* Nama Lokasi */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Nama Lokasi</MDTypography>
                   </Grid>
@@ -117,7 +117,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Nama Petani */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Nama Petani</MDTypography>
                   </Grid>
@@ -129,7 +129,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Koordinat */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Koordinat</MDTypography>
                   </Grid>
@@ -141,7 +141,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Lokasi Lengkap */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Lokasi Lengkap</MDTypography>
                   </Grid>
@@ -153,7 +153,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Jumlah Koloni Single */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Jumlah Koloni Single</MDTypography>
                   </Grid>
@@ -165,7 +165,7 @@ function DetailLokasi() {
                   </Grid>
                 </Grid>
                 {/* Jumlah Koloni Super */}
-                <Grid container spacing={3} align="left" ml={2}>
+                <Grid container spacing={3} align="left" sx={{ ml: { sm: 2 }}}>
                   <Grid item xs={4} md={4} mb={2}>
                     <MDTypography variant="subtitle2" fontWeight="regular">Jumlah Koloni Super</MDTypography>
                   </Grid>

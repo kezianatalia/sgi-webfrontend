@@ -116,7 +116,6 @@ function EditUser() {
         username: formData.username,
         role: formData.role,
         name: formData.name,
-        password: formData.name,
       });
       console.log("User berhasil diubah:", response.data);
       navigate(`/user/${id}`);
