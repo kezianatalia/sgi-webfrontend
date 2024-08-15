@@ -24,6 +24,7 @@ function ScanQrProduksi() {
     const [scanning, setScanning] = useState(false);
     const [result, setResult] = useState('No result');
     const [legacyMode, setLegacyMode] = useState(false);
+    const [constraint, setConstraint] = useState({});
 
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -85,7 +86,22 @@ function ScanQrProduksi() {
         reader.readAsDataURL(file);
       }
     };
-
+    var backupdevice = null;
+    navigator.mediaDevices.enumerateDevices()
+    .then((devices) => {
+      devices.forEach((device) => {
+        if (device.kind === 'videoinput') {
+          backupdevice = device;
+          if ((device.label.toLowerCase().includes("rear") || device.label.toLowerCase().includes("back"))) {
+            setConstraint({audio:false, video:{deviceId:device.deviceId}});
+          }
+        } 
+      });
+    }).finally(() => {
+      if (JSON.stringify(constraint) === '{}'){
+        setConstraint({audio:false, video:{deviceId:backupdevice.deviceId}});
+      }
+    });
     return(
     <DashboardLayout>
       <DashboardNavbar />
@@ -143,7 +159,7 @@ function ScanQrProduksi() {
                           style={previewStyle}
                           onError={handleError}
                           onScan={handleScan}
-                          facingMode="environment"
+                          constraints={constraint}
                         />
                         <img 
                           src={QrFrame} 

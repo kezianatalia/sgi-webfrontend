@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import QrScanner from 'react-qr-scanner';
 
 const QRScannerComponent = ({ onScan }) => {
   const navigate = useNavigate();
+  const [constraint, setConstraint] = useState({});
 
   const handleScan = data => {
     if (data) {
@@ -16,6 +17,23 @@ const QRScannerComponent = ({ onScan }) => {
     console.error(err);
   };
 
+  var backupdevice = null;
+  navigator.mediaDevices.enumerateDevices()
+  .then((devices) => {
+    devices.forEach((device) => {
+      if (device.kind === 'videoinput') {
+        backupdevice = device;
+        if ((device.label.includes("rear") || device.label.includes("back"))) {
+          setConstraint({audio:false, video:{deviceId:device.deviceId}});
+        }
+      } 
+    });
+  }).finally(() => {
+    if (JSON.stringify(constraint) === '{}'){
+      setConstraint({audio:false, video:{deviceId:backupdevice.deviceId}});
+    }
+  });
+
   return (
     <div>
       <QrScanner
@@ -23,6 +41,7 @@ const QRScannerComponent = ({ onScan }) => {
         onError={handleError}
         onScan={handleScan}
         style={{ width: '100%' }}
+        constraints={constraint}
       />
     </div>
   );

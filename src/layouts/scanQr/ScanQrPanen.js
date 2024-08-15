@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
 
-import QrScanner from 'react-qr-scanner';
+import QrReader from 'react-qr-scanner';
 import QrScannerLib from 'qr-scanner';
 import "./QrStyles.css";
 import QrFrame from "./qr-frame.svg";
@@ -24,6 +24,7 @@ function ScanQrPanen() {
     const [result, setResult] = useState('No result');
     const [scanning, setScanning] = useState(false);
     const [legacyMode, setLegacyMode] = useState(false);
+    const [constraint, setConstraint] = useState({});
 
     const user = JSON.parse(localStorage.getItem("user"));
 
@@ -88,6 +89,23 @@ function ScanQrPanen() {
       reader.readAsDataURL(file);
     }
   };
+  
+  var backupdevice = null;
+  navigator.mediaDevices.enumerateDevices()
+  .then((devices) => {
+    devices.forEach((device) => {
+      if (device.kind === 'videoinput') {
+        backupdevice = device;
+        if ((device.label.includes("rear") || device.label.includes("back"))) {
+          setConstraint({audio:false, video:{deviceId:device.deviceId}});
+        }
+      } 
+    });
+  }).finally(() => {
+    if (JSON.stringify(constraint) === '{}'){
+      setConstraint({audio:false, video:{deviceId:backupdevice.deviceId}});
+    }
+  });
 
     return(
     <DashboardLayout>
@@ -141,12 +159,12 @@ function ScanQrPanen() {
                     <MDBox pt={2} px={5}>
                       <Grid container spacing={3} align='center'>
                         <Grid item xs={12} md={12}>
-                          <QrScanner
+                          <QrReader
                             delay={300}
                             style={previewStyle}
                             onError={handleError}
                             onScan={handleScan}
-                            facingMode="environment"
+                            constraints={constraint}
                           />
                           <img 
                             src={QrFrame} 
